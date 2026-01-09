@@ -5,14 +5,14 @@ import { useEffect, useRef, useState } from "react";
 type TextScrambleProps = {
   text: string;
   duration?: number;
-  autoPlay?: boolean;
+  trigger?: "hover" | "auto";
   className?: string;
 };
 
 export default function ScrambleText({
   text,
   duration = 1000,
-  autoPlay = false,
+  trigger = "hover",
   className = "",
 }: TextScrambleProps) {
   const LETTERS =
@@ -49,17 +49,17 @@ export default function ScrambleText({
   };
 
   useEffect(() => {
-    if (autoPlay && !hasPlayed.current) {
+    if (trigger === "auto" && !hasPlayed.current) {
       hasPlayed.current = true;
       runScramble();
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [autoPlay]);
+  }, [trigger]);
 
   return (
     <span
-      onMouseEnter={runScramble}
+      onMouseEnter={trigger === "hover" ? runScramble : undefined}
       className={`inline-block select-none tracking-widest ${className}`}
     >
       {displayedText}
