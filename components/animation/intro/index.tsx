@@ -30,7 +30,7 @@ export default function Intro() {
           className={`fixed inset-0 z-45 bg-[#282828] flex items-center justify-center`}
           initial={{ y: 0 }}
           animate={{ y: "-100%" }}
-          transition={{ duration: 0.8, delay: 2, ease: "easeOut" }}
+          transition={{ duration: 0.8, delay: 2, ease: "easeIn" }}
         >
           <div
             className={`inset-0 z-45 text-white flex flex-col items-center justify-center`}
