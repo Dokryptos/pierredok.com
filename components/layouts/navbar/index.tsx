@@ -7,12 +7,14 @@ import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import ScrambleText from "@/components/animation/scrambleText";
-import { AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import NavItem from "./NavItem";
 
 export default function Navbar() {
   const [hovered, setHovered] = useState<string | null>(null);
   const pathname = usePathname();
-
+  const isActive = (slug: string) => pathname === `/${slug}`;
+  console.log(isActive);
   return (
     <Grid>
       <nav className="fixed top-0 left-0 bg-white pt-5 pl-4 uppercase flex flex-col font-normal font-ppMontreal">
@@ -20,34 +22,20 @@ export default function Navbar() {
           <ScrambleText text="PIERRE DOK" trigger="hover" />
           <ScrambleText text="FULLSTACK DEVELOPER" trigger="hover" />
         </Link>
-        <Link
+        <NavItem
+          label="Works"
           href="/"
-          className="flex pb-[1.5]"
-          onMouseEnter={() => setHovered("home")}
-          onMouseLeave={() => setHovered(null)}
-        >
-          <AnimatePresence>
-            <Image
-              src={arrowOrange}
-              alt="Logo Pierre Dok"
-              className={`${hovered === "home" ? "block " : "hidden x-[-10]"} w-4 mr-2`}
-            />
-          </AnimatePresence>
-          <div>Works</div>
-        </Link>
-        <Link
+          slug="works"
+          hovered={hovered}
+          onHover={setHovered}
+        />
+        <NavItem
+          label="About"
           href="/about"
-          className="flex"
-          onMouseEnter={() => setHovered("about")}
-          onMouseLeave={() => setHovered(null)}
-        >
-          <Image
-            src={arrowOrange}
-            alt="Logo Pierre Dok"
-            className={`${hovered === "about" ? "block" : "hidden"} ${pathname === "/about" ? "block" : ""} w-4 mr-2`}
-          />
-          <div>About</div>
-        </Link>
+          slug="about"
+          hovered={hovered}
+          onHover={setHovered}
+        />
       </nav>
     </Grid>
   );
