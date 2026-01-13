@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Intro from "@/components/animation/intro";
+import Navbar from "@/components/layouts/navbar";
 
 const neueHaas = localFont({
   src: [
@@ -49,6 +50,7 @@ export default function RootLayout({
         className={`${neueHaas.variable} ${ppMontreal.variable} font-neueHaas text-[10px]/[150%] antialiased`}
       >
         <Intro />
+        <Navbar />
         {children}
       </body>
     </html>
