@@ -8,7 +8,7 @@ type GridProps = {
 export default function Grid({ children, className = "" }: GridProps) {
   return (
     <div
-      className={`grid grid-cols-4 tablet:grid-cols-9 laptop:grid-cols-12 ${className}`}
+      className={`grid grid-cols-4 mg:grid-cols-9 lg:grid-cols-12 ${className}`}
     >
       {children}
     </div>
