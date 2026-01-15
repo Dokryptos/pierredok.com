@@ -45,16 +45,36 @@ export const projectType = defineType({
       description: `The slug is the url path of the project, Can use Generate button but try to keep it clean Without ponctuation(, . ; : ! ?) and Without (&é"'(-è_çà)=) (Obligation)`,
     }),
     defineField({
-      name: "thumbnail",
-      title: "Thumbnail",
-      type: "image",
+      name: "Designer",
+      title: "Designer",
+      type: "string",
       validation: (rule) =>
         rule.required().error(`Required to generate a page on the website`),
-      options: {
-        hotspot: true,
-      },
-      description:
-        "The first image use for the presentation of the project (Obligation)",
+      description: "The designer of the project (Obligation)",
+    }),
+    defineField({
+      name: "link",
+      title: "Link",
+      type: "string",
+      validation: (rule) =>
+        rule.required().error(`Required to generate a page on the website`),
+      description: "The link of the project (Obligation)",
+    }),
+    defineField({
+      name: "year",
+      title: "Year",
+      type: "number",
+      validation: (rule) =>
+        rule.required().error(`Required to generate a page on the website`),
+      description: "The year of the project (Obligation)",
+    }),
+    defineField({
+      name: "category",
+      title: "Category",
+      type: "number",
+      validation: (rule) =>
+        rule.required().error(`Required to generate a page on the website`),
+      description: "The category of the project Portfolio | Perso (Obligation)",
     }),
     defineField({
       name: "gallery",

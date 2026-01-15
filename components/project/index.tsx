@@ -3,5 +3,9 @@
 import Grid from "../ui/grid";
 
 export default function ProjectComponent() {
-  return <Grid></Grid>;
+  return (
+    <Grid>
+      <div>test</div>
+    </Grid>
+  );
 }
