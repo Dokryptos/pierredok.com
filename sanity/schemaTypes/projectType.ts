@@ -71,7 +71,7 @@ export const projectType = defineType({
     defineField({
       name: "category",
       title: "Category",
-      type: "number",
+      type: "string",
       validation: (rule) =>
         rule.required().error(`Required to generate a page on the website`),
       description: "The category of the project Portfolio | Perso (Obligation)",
@@ -81,16 +81,40 @@ export const projectType = defineType({
       title: "gallery",
       type: "array",
       description:
-        "Select all the image you want to render, in Webp for keep the place on the CMS and keep the CMS available with the free version (Obligation) with 1 image",
+        "Select all the image you want to render, in Webp for keep the place on the CMS and keep the CMS available with the free version (Obligation) with 1 image or 1 Link vimeo not both",
       validation: (rule) =>
         rule.required().error(`Required to generate a page on the website`),
       of: [
         defineArrayMember({
-          type: "image",
-          name: "image",
-          options: {
-            hotspot: true,
-          },
+          type: "object",
+          name: "galleryItem",
+          description: "Need 1 video or 1 image for complmete the project",
+          fields: [
+            defineField({
+              name: "image",
+              title: "Image",
+              type: "image",
+              options: { hotspot: true },
+              description: "Image related to the array of project",
+            }),
+            defineField({
+              title: "Video file",
+              type: "mux.video",
+              name: "video",
+              description:
+                "Video related to the Video inside array of project.",
+            }),
+          ],
+          validation: (Rule) =>
+            Rule.custom((fields) => {
+              if (fields?.image && fields?.video) {
+                return "You can only have image OR a video, not both";
+              }
+              if (!fields?.image && !fields?.video) {
+                return "You must provide either an image or a video.";
+              }
+              return true;
+            }),
         }),
       ],
     }),

@@ -8,12 +8,26 @@ export interface SanityImage {
     _type: "reference";
   };
 }
+export interface SanityVideo {
+  asset: {
+    playbackId: string;
+    data: object;
+    thumbTime: number;
+  };
+}
+
+export interface SanityGallery {
+  image?: SanityImage;
+  video?: SanityVideo;
+}
 
 export default interface Project {
   _id: string;
   title: string;
   shortTitle?: string;
   slug: Slug;
-  thumbnail: SanityImage;
-  gallery: SanityImage[];
+  Designer: string;
+  link: string;
+  category: string;
+  gallery: SanityGallery[];
 }
