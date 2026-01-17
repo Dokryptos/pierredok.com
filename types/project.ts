@@ -26,7 +26,8 @@ export default interface Project {
   title: string;
   shortTitle?: string;
   slug: Slug;
-  Designer: string;
+  designer: string;
+  year: number;
   link: string;
   category: string;
   gallery: SanityGallery[];
