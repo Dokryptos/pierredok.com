@@ -2,8 +2,10 @@
 
 import Grid from "../ui/grid";
 import ProjectType from "@/types/project";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { UIImageSanity } from "../ui/image/sanity";
 
 interface ProjectComponentProps {
   projectCurrent: ProjectType;
@@ -20,6 +22,11 @@ export default function ProjectComponent({ projectCurrent, projectAll }: Project
          <p>Year<span className="text-[12px] pl-8">{projectCurrent.year}</span></p>
          <p>Designer<span className="text-[12px] pl-4">{projectCurrent.Designer}</span></p>
          <p>Link<span className="text-[12px] pl-8.5">{projectCurrent.link}</span></p>
+      </div>
+      <div>
+        {projectCurrent.gallery.map((item, index) => {
+            return item.image ? (<UIImageSanity key={index} asset={item.image} alt={`${projectCurrent.title} n'${index}`} className="w-full h-auto" />) : null;
+        })}
       </div>
 
       <div className="col-start-3 row-1 z-50">
