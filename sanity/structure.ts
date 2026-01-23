@@ -8,8 +8,8 @@ export const structure: StructureResolver = (S, context) =>
     .title("Content")
     .items([
       orderableDocumentListDeskItem({
-        type: "projects",
-        title: "Projects",
+        type: "project",
+        title: "Project",
         icon: ImagesIcon,
         S,
         context,

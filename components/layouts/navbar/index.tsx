@@ -4,7 +4,6 @@ import Grid from "@/components/ui/grid";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
 import ScrambleText from "@/components/animation/scrambleText";
 import NavItem from "./NavItem";
 import darkModeButton from "@/public/darkModeButton.svg";
@@ -15,11 +14,11 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 bg-white  uppercase flex flex-col font-normal font-ppMontreal w-full">
       <Grid className="items-start pt-5 pl-4 pr-4">
-        <Link href="/" className="col-start-1 col-span-2 mb-4 flex flex-col">
+        <Link href="/" className="col-start-1 col-span-1 mb-4 flex flex-col">
           <ScrambleText text="PIERRE DOK" trigger="hover" />
-          <ScrambleText text="FULLSTACK DEVELOPER" trigger="hover" />
+          <ScrambleText text="DEVELOPER" trigger="hover" />
         </Link>
-        <div           className="col-start-1 lg:col-start-3"
+        <div           className="col-start-1 lg:col-start-2"
 >
         <NavItem
           label="Works"

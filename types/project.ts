@@ -26,7 +26,7 @@ export default interface Project {
   title: string;
   shortTitle?: string;
   slug: Slug;
-  designer: string;
+  Designer: string;
   year: number;
   link: string;
   category: string;

@@ -3,50 +3,39 @@ import { notFound } from "next/navigation";
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
 
-
 export const revalidate = 0;
 export const dynamic = "force-dynamic";
-const PROJECT_SLUG_QUERY = defineQuery(`
+
+// Requête SANS paramètre obligatoire $slug
+const HOME_QUERY = defineQuery(`
   {
-  "projectCurrentSlug": *[
-    _type == "projects" &&
-    slug.current == $slug
-][0]{
-  ...,
-  gallery[]{
-  ...,
-  video{ 
-  asset ->{
-  playbackId,
-  data,
-  thumbTime
+    "projectCurrentSlug": *[_type == "project"] | order(orderRank asc)[0]{
+      ...,
+      gallery[]{
+        ...,
+        video{ asset ->{ playbackId, data, thumbTime } }
       }
+    },
+    "projectAllProject": *[_type == "project"] | order(orderRank asc) {
+      _id, title, slug, category, year, link, designer, gallery
     }
   }
-},
-  "projectAllProject": *[
-  _type == "projects"
-] | order(orderRank) {_id, title, slug, category, year, link, designer, gallery}
-}
 `);
 
-
-export default async function ProjectPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
-
+export default async function HomePage() {
   const { data } = await sanityFetch({
-    query: PROJECT_SLUG_QUERY,
-    params: { slug},
+    query: HOME_QUERY,
+    // On ne passe PAS de params ici, la requête s'en passe
   });
-if (!data || !data.projectCurrentSlug) {
+
+  if (!data || !data.projectCurrentSlug) {
     notFound();
   }
-  
-  const { projectCurrentSlug, projectAllProject } = data;
 
-  return <ProjectComponent projectAll={projectAllProject} projectCurrent={projectCurrentSlug} />;
+  return (
+    <ProjectComponent 
+      projectAll={data.projectAllProject} 
+      projectCurrent={data.projectCurrentSlug} 
+    />
+  );
 }
